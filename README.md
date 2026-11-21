@@ -59,7 +59,7 @@ START → agent ──(є tool_calls і ліміти не вичерпано)─
 
 1. Відкрити `hw1_colab.ipynb` у Colab.
 2. Додати в Colab Secrets ключ `ANTHROPIC_API_KEY` і дозволити ноутбуку доступ до нього.
-3. Вказати `REPO_URL` у першій клітинці. `DRY_RUN = True` — пробний прогін одного тест-кейсу,
+3. `DRY_RUN = True` — пробний прогін одного тест-кейсу,
    `False` — повний прогін (5 тест-кейсів + 3 демо).
 4. Runtime → Run all. Наприкінці ноутбук завантажує `test_results.json`, `demo_results.json`, `trajectory.json`.
 
