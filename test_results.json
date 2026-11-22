@@ -1,0 +1,338 @@
+{
+  "summary": {
+    "total": 5,
+    "success": 4,
+    "partial": 1,
+    "fail": 0,
+    "avg_steps": 2.2,
+    "avg_time_ms": 7720.4,
+    "tokens_total": {
+      "input": 54074,
+      "output": 3645
+    }
+  },
+  "results": [
+    {
+      "test_id": "TC-001",
+      "complexity": "simple",
+      "query": "Привіт! Чи працюють зараз сервери в Європі?",
+      "expected": {
+        "tools": [
+          "get_server_status"
+        ],
+        "category": [
+          "server"
+        ],
+        "next_action": [
+          "none"
+        ],
+        "resolved": true
+      },
+      "actual": {
+        "answer": "Так, європейські сервери зараз працюють у штатному режимі. Інцидентів і запланованого обслуговування немає. Якщо у вас усе ж є лаги чи розриви з'єднання, напишіть, що саме відбувається, і я перевірю інші можливі причини.",
+        "category": "server",
+        "resolved": true,
+        "next_action": "none",
+        "evidence": [
+          {
+            "tool": "get_server_status",
+            "fact": "Регіон eu: статус operational, інцидентів немає, технічного обслуговування не заплановано."
+          }
+        ],
+        "compensation": null
+      },
+      "status": "success",
+      "checks": {
+        "stop_reason": true,
+        "tools": true,
+        "category": true,
+        "next_action": true,
+        "resolved": true,
+        "evidence_grounded": true
+      },
+      "stop_reason": "final_answer",
+      "steps": 2,
+      "tool_calls": [
+        "get_server_status"
+      ],
+      "tool_calls_count": {
+        "get_server_status": 1
+      },
+      "time_ms": 5131.1,
+      "tokens": {
+        "input": 9262,
+        "output": 338
+      }
+    },
+    {
+      "test_id": "TC-002",
+      "complexity": "simple",
+      "query": "У мене iPhone, версія гри 2.0.4. Вона ще підтримується? Яка зараз остання?",
+      "expected": {
+        "tools": [
+          "check_client"
+        ],
+        "category": [
+          "technical"
+        ],
+        "next_action": [
+          "none"
+        ],
+        "resolved": true
+      },
+      "actual": {
+        "answer": "Версія 2.0.4 на iOS більше не підтримується. Остання версія — 2.3.1, оновлення доступне в App Store. Для 2.0.4 відомих крашів немає, але раджу оновитися, бо на непідтримуваній версії можливі проблеми, які вже виправлені в новіших. Якщо після оновлення будуть вильоти, напишіть мені, і я допоможу.",
+        "category": "technical",
+        "resolved": true,
+        "next_action": "none",
+        "evidence": [
+          {
+            "tool": "check_client",
+            "fact": "Версія 2.0.4 на iOS не підтримується (supported: false)"
+          },
+          {
+            "tool": "check_client",
+            "fact": "Остання версія — 2.3.1, оновлення доступне"
+          },
+          {
+            "tool": "check_client",
+            "fact": "Відомих крашів для версії 2.0.4 немає"
+          }
+        ],
+        "compensation": null
+      },
+      "status": "success",
+      "checks": {
+        "stop_reason": true,
+        "tools": true,
+        "category": true,
+        "next_action": true,
+        "resolved": true,
+        "evidence_grounded": true
+      },
+      "stop_reason": "final_answer",
+      "steps": 2,
+      "tool_calls": [
+        "check_client"
+      ],
+      "tool_calls_count": {
+        "check_client": 1
+      },
+      "time_ms": 6825.1,
+      "tokens": {
+        "input": 9452,
+        "output": 522
+      }
+    },
+    {
+      "test_id": "TC-003",
+      "complexity": "medium",
+      "query": "Я гравець P-1001. Купив 500 кристалів, транзакція T-1042. Гроші списали, а кристали так і не прийшли.",
+      "expected": {
+        "tools": [
+          "get_purchase_status"
+        ],
+        "category": [
+          "purchase"
+        ],
+        "next_action": [
+          "escalate",
+          "compensation"
+        ],
+        "resolved": false
+      },
+      "actual": {
+        "answer": "Я перевірив транзакцію T-1042: оплата через Google Play пройшла (статус completed, $4.99), але 500 кристалів не видано. Відкрийте гру, зайдіть у «Налаштування → Відновити покупки», потім перезапустіть гру й перевірте баланс. Якщо кристали не з'являться, я можу передати запит у білінг для ручної видачі — скажіть, чи створювати ескалацію.",
+        "category": "purchase",
+        "resolved": false,
+        "next_action": "escalate",
+        "evidence": [
+          {
+            "tool": "get_purchase_status",
+            "fact": "Транзакція T-1042: 500 кристалів, $4.99, Google Play, payment_status completed, delivered false"
+          },
+          {
+            "tool": "get_player_profile",
+            "fact": "Гравець P-1001 (IronSmith), android, версія застосунку 2.3.0, країна UA, не VIP, не забанений"
+          }
+        ],
+        "compensation": null
+      },
+      "status": "success",
+      "checks": {
+        "stop_reason": true,
+        "tools": true,
+        "category": true,
+        "next_action": true,
+        "resolved": true,
+        "evidence_grounded": true
+      },
+      "stop_reason": "final_answer",
+      "steps": 2,
+      "tool_calls": [
+        "get_purchase_status",
+        "get_player_profile"
+      ],
+      "tool_calls_count": {
+        "get_purchase_status": 1,
+        "get_player_profile": 1
+      },
+      "time_ms": 7996.9,
+      "tokens": {
+        "input": 9948,
+        "output": 699
+      }
+    },
+    {
+      "test_id": "TC-004",
+      "complexity": "medium",
+      "query": "Гра вилітає щоразу, коли відкриваю вікно івенту. Android, версія 2.3.0. Що робити?",
+      "expected": {
+        "tools": [
+          "check_client",
+          "search_known_issues"
+        ],
+        "category": [
+          "technical"
+        ],
+        "next_action": [
+          "none"
+        ],
+        "resolved": true
+      },
+      "actual": {
+        "answer": "Це відома проблема (KI-01): у версії 2.3.0 на Android гра вилітає при відкритті вікна івенту, особливо на пристроях із GPU Mali, а у версії 2.3.1 це виправлено. Оновіть гру до 2.3.1 в Google Play, після цього вікно івенту має відкриватися без вильотів. Якщо через виліт ви пропустили івент, напишіть свій ID гравця (формат P-1234), і я розрахую компенсацію та передам запит оператору, бо нараховувати її самостійно я не можу.",
+        "category": "technical",
+        "resolved": true,
+        "next_action": "none",
+        "evidence": [
+          {
+            "tool": "check_client",
+            "fact": "Android 2.3.0 підтримується, доступне оновлення до 2.3.1"
+          },
+          {
+            "tool": "check_client",
+            "fact": "Відомий виліт при відкритті вікна івенту на пристроях з GPU Mali (KI-01)"
+          },
+          {
+            "tool": "search_known_issues",
+            "fact": "KI-01: Android 2.3.0, виліт при відкритті івенту, виправлено у 2.3.1"
+          },
+          {
+            "tool": "search_known_issues",
+            "fact": "Обхід для KI-01: оновити гру до 2.3.1 з Google Play"
+          },
+          {
+            "tool": "search_known_issues",
+            "fact": "KI-04: гравцям, які пропустили івент через підтверджений технічний збій, нараховується компенсація кристалами"
+          }
+        ],
+        "compensation": null
+      },
+      "status": "success",
+      "checks": {
+        "stop_reason": true,
+        "tools": true,
+        "category": true,
+        "next_action": true,
+        "resolved": true,
+        "evidence_grounded": true
+      },
+      "stop_reason": "final_answer",
+      "steps": 2,
+      "tool_calls": [
+        "check_client",
+        "search_known_issues"
+      ],
+      "tool_calls_count": {
+        "check_client": 1,
+        "search_known_issues": 1
+      },
+      "time_ms": 8061.5,
+      "tokens": {
+        "input": 10275,
+        "output": 854
+      }
+    },
+    {
+      "test_id": "TC-005",
+      "complexity": "complex",
+      "query": "Я P-1001. Через виліт на Android (версія 2.3.0) я пропустив івент «Кузня дракона». Чи належить мені компенсація і скільки?",
+      "expected": {
+        "tools": [
+          "get_player_profile",
+          "calculate_compensation"
+        ],
+        "category": [
+          "technical"
+        ],
+        "next_action": [
+          "compensation",
+          "escalate"
+        ],
+        "compensation": 430
+      },
+      "actual": {
+        "answer": "Так, вам належить компенсація: на Android 2.3.0 є підтверджений виліт при відкритті івенту (KI-01), а за політикою компенсацій гравцям, які через такий збій пропустили івент, нараховують кристали. Сума для вашого 42 рівня — 430 кристалів, але нарахувати їх я не можу, тож передаю запит оператору. Виправлення вийшло у версії 2.3.1, тому оновіть гру в Google Play. Якщо прогрес кузні не відновиться з хмари після повторного входу, напишіть мені.",
+        "category": "purchase",
+        "resolved": false,
+        "next_action": "compensation",
+        "evidence": [
+          {
+            "tool": "get_player_profile",
+            "fact": "Гравець P-1001, рівень 42, Android, версія 2.3.0, не забанений"
+          },
+          {
+            "tool": "check_client",
+            "fact": "Версія 2.3.0 підтримується, доступна 2.3.1; відомий виліт при відкритті вікна івенту на пристроях з GPU Mali (KI-01)"
+          },
+          {
+            "tool": "search_known_issues",
+            "fact": "KI-01: виліт при відкритті івенту на Android 2.3.0, виправлено у 2.3.1"
+          },
+          {
+            "tool": "search_known_issues",
+            "fact": "KI-04: гравцям, які пропустили івент через підтверджений технічний збій, нараховується компенсація кристалами"
+          },
+          {
+            "tool": "search_known_issues",
+            "fact": "KI-03: втрата прогресу кузні після виліту, прогрес відновлюється з хмари при наступному вході, якщо ні — компенсація"
+          },
+          {
+            "tool": "calculate_compensation",
+            "fact": "Компенсація за пропущений івент для 42 рівня: 430 кристалів"
+          }
+        ],
+        "compensation": 430
+      },
+      "status": "partial",
+      "checks": {
+        "stop_reason": true,
+        "tools": true,
+        "category": false,
+        "next_action": true,
+        "compensation": true,
+        "evidence_grounded": true
+      },
+      "stop_reason": "final_answer",
+      "steps": 3,
+      "tool_calls": [
+        "get_player_profile",
+        "check_client",
+        "search_known_issues",
+        "calculate_compensation"
+      ],
+      "tool_calls_count": {
+        "get_player_profile": 1,
+        "check_client": 1,
+        "search_known_issues": 1,
+        "calculate_compensation": 1
+      },
+      "time_ms": 10587.4,
+      "tokens": {
+        "input": 15137,
+        "output": 1232
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+[
+  {
+    "demo_id": "DEMO-MAX-STEPS",
+    "purpose": "Ліміт кроків: складний кейс TC-005 з max_steps=2.",
+    "limits": {
+      "max_steps": 2
+    },
+    "expected_stop": "max_steps",
+    "actual_stop": "max_steps",
+    "triggered": true,
+    "steps": 2,
+    "tool_calls": [
+      "get_player_profile",
+      "check_client",
+      "search_known_issues",
+      "calculate_compensation"
+    ],
+    "time_ms": 3228.4,
+    "answer": "Агент досяг ліміту кроків (2) і зупинився, не завершивши задачу. Звернення передано оператору підтримки."
+  },
+  {
+    "demo_id": "DEMO-TIMEOUT",
+    "purpose": "Тайм-аут: сервер статусів відповідає 8 с, загальний ліміт 5 с.",
+    "limits": {
+      "timeout_s": 5
+    },
+    "expected_stop": "timeout",
+    "actual_stop": "timeout",
+    "triggered": true,
+    "steps": 1,
+    "tool_calls": [
+      "get_server_status"
+    ],
+    "time_ms": 5001.8,
+    "answer": "Агент перевищив ліміт часу (5 с) і зупинився, не завершивши задачу. Звернення передано оператору підтримки."
+  },
+  {
+    "demo_id": "DEMO-LOOP",
+    "purpose": "Зациклення: покупка в статусі syncing, гравець просить перевіряти, доки не прийде.",
+    "limits": {},
+    "expected_stop": "loop",
+    "actual_stop": "loop",
+    "triggered": true,
+    "steps": 3,
+    "tool_calls": [
+      "get_purchase_status",
+      "get_purchase_status",
+      "get_purchase_status"
+    ],
+    "time_ms": 5095.9,
+    "answer": "Виявлено зациклення: 3 однакові виклики get_purchase_status поспіль. Агент зупинився. Звернення передано оператору підтримки."
+  }
+]
